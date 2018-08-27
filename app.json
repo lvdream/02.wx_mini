@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/result/result"
+  ],
+  "window":{
+    "navigationBarBackgroundColor": "#FAFAFA",
+    "navigationBarTitleText": "小贝复制",
+    "navigationBarTextStyle":"black",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#f8f8f8"
+  }
+}
