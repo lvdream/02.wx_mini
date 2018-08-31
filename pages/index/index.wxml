@@ -7,14 +7,14 @@
   <view class="title">
     <view class="title-text">小贝复制</view>
   </view>
-  <view class="desc">>>>>识别图片里面的表格和文字</view>
+  <view class="desc">>>>>识别图片里的表格和文字</view>
 </view>
 <van-cell-group>
     <van-field
       value="{{ sms }}"
       center
       clearable
-      label="选择图片"
+      label="待识别的图片"
       placeholder="图片"
       use-button-slot
       border="{{ false }}"

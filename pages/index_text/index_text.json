@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "小贝复制",
+  "navigationBarTitleText": "小贝复制--文本获取",
   "usingComponents": {
     "demo-block": "../../components/demo-block/index",
     "van-tabbar": "../../dist/tabbar/index",
