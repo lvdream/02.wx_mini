@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
+    "pages/index_text/index_text",
     "pages/result/result"
   ],
   "window":{

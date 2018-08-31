@@ -12,14 +12,31 @@ Page({
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
         upload(that, tempFilePaths);
       }
     })
   },
   onChange(event) {
-    console.log(event);
+    console.log(event)
+    if(event.detail==1){
+      wx.navigateTo({
+        url: '',
+      });
+      wx.downloadFile({
+        url: 'http://localhost:8080/download?file=4225ffa59f2348f0a928e45afc8099ce_new.xlsx',
+        success: function (res) {
+          var filePath = res.tempFilePath;
+          console.log(res);
+          wx.openDocument({
+            filePath: filePath,
+            success: function (res) {
+              console.log('打开文档成功');
+            }
+          })
+        }
+      })
+    }
   }
 });
 function upload(page, path) {
