@@ -35,6 +35,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    SERVER_URL: "https://www.xbkb.xyz/orc"
+    SERVER_URL: "https://www.xbkb.xyz/orc",
+    FILE_KEY:'file_key',
+    MSG_UPLOAD_ERROR:'上传失败'
   }
 })

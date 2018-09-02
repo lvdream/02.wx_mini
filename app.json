@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/index_text/index_text",
-    "pages/result/result"
+    "pages/result/result",
+    "pages/result_excel/result",
+    "pages/out/index"
   ],
   "window":{
     "navigationBarBackgroundColor": "#FAFAFA",

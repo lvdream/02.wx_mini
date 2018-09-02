@@ -8,9 +8,9 @@ function navigate(eventObj) {
   if (eventObj.detail == 0) {
     url = "/pages/index/index";
   } else if (eventObj.detail == 1) {
-    url = "/pages/index_text/index_text";
+    url = "/pages/out/index";
   } else {
-    url = "/pages/index_eng/index_eng";
+    url = "/pages/result_excel/result";
   }
   navTo(url);
 };
@@ -25,7 +25,8 @@ function upload(fileType, that) {
     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
     success: function(res) {
       var tempFilePaths = res.tempFilePaths;
-      uploadfiles(that, tempFilePaths, fileType);
+      that.toggle('middle');
+      uploadfiles(that, tempFilePaths, fileType,that);
     }
   });
 };
@@ -34,14 +35,11 @@ function upload(fileType, that) {
  * @param page 页面对象
  * @param path 上传路径
  * @param fileType 上传类型,识别类型[文本,Excel]
+ * @param that 页面对象
  */
-function uploadfiles(page, path, fileType) {
+function uploadfiles(page, path, fileType,that) {
   var url = constant.SERVER_URL + "/upload";
-  wx.showToast({
-      icon: "loading",
-      title: "正在上传"
-    }),
-    wx.uploadFile({
+      wx.uploadFile({
       url: url,
       filePath: path[0],
       name: 'file',
@@ -55,28 +53,33 @@ function uploadfiles(page, path, fileType) {
       },
       success: function(res) {
         if (res.statusCode != 200) {
-          showMsg('上传失败');
+          that.toggle('middle');
+          showMsg(constant.MSG_UPLOAD_ERROR);
           return;
         }
         var data = res.data;
         try {
           var j = JSON.parse(data);
           if (null != j.data.error_code) {
+            that.toggle('middle');
             showMsg('文件解析失败,请重试!');
           } else {
-
+            
+            saveData(constant.FILE_KEY, j.data.returnstr);
+            that.toggle('middle');
+            navTo("/pages/result_excel/result");
           }
         } catch (e) {
-          showMsg('上传失败');
+          that.toggle('middle');
+          showMsg(constant.MSG_UPLOAD_ERROR);
         }
-        console.log(data);
-
       },
       fail: function(e) {
-        showMsg('上传失败');
+        that.toggle('middle');
+        showMsg(constant.MSG_UPLOAD_ERROR);
       },
       complete: function() {
-        wx.hideToast(); //隐藏Toast
+        that.toggle('middle');
       }
     })
 };
@@ -103,6 +106,37 @@ function navTo(url) {
   })
 }
 /**
+ * 下载远程文件并且打开
+ */
+function openFile(fileRemote) {
+  wx.downloadFile({
+    url: constant.SERVER_URL + "/download?file=" + fileRemote,
+    success: function(res) {
+      var filePath = res.tempFilePath
+      wx.openDocument({
+        filePath: filePath,
+        success: function(res) {
+          console.log('打开文档成功')
+        }
+      })
+    }
+  });
+}
+/**
+ * 下载远程文件并且保存
+ */
+function saveFile(fileRemote) {
+  wx.downloadFile({
+    url: constant.SERVER_URL + "/download?file=" + fileRemote,
+    success: function (res) {
+      var filePath = res.tempFilePath
+      wx.saveFile({
+        tempFilePath: filePath,
+      });
+    }
+  });
+}
+/**
  * 保存变量
  * @param key 保存的键值
  * @param value 对应的值
@@ -110,8 +144,19 @@ function navTo(url) {
 function saveData(key, value) {
   wx.setStorageSync(key, value);
 }
-
+/**
+ * 获取变量
+ * @param key 保存的键值
+ */
+function getData(key) {
+  return wx.getStorageSync(key);
+}
 module.exports = {
   navigate: navigate,
-  upload: upload
+  upload: upload,
+  constant: constant,
+  getData: getData,
+  saveData: saveData,
+  openFile: openFile,
+  saveFile: saveFile
 };

@@ -2,9 +2,17 @@ import Page from '../../common/page';
 var util = require('../../common/util.js');
 Page({
   data: {
-    active: 0
+    active: 0,
+    show: {
+      middle: false
+    }
   },
-  uploadPhoto() {
+  toggle(type) {
+    this.setData({
+      [`show.${type}`]: !this.data.show[type]
+    });
+  },
+  uploadPhoto() { 
     var that = this;
     util.upload(0,that);
   },

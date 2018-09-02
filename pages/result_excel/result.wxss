@@ -42,9 +42,7 @@
   background-color: #fff;
   padding: 17px 15px;
 }
-.center {
-  width: 60%;
-  padding: 20px;
-  text-align: center;
-  box-sizing: border-box;
+.row {
+  height: 44px;
+  margin-bottom: 15px;
 }

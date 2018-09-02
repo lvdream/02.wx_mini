@@ -6,6 +6,7 @@
     "van-tabbar-item": "../../dist/tabbar-item/index",
     "van-field": "../../dist/field/index",
     "van-button": "../../dist/button/index",
-    "van-cell-group": "../../dist/cell-group/index"
+    "van-cell-group": "../../dist/cell-group/index",
+    "van-popup": "../../dist/popup/index"
   }
 }
