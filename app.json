@@ -5,6 +5,7 @@
     "pages/index_text/index_text",
     "pages/result/result",
     "pages/result_excel/result",
+    "pages/result_excel/manual/index",
     "pages/out/index"
   ],
   "window":{

@@ -1,4 +1,5 @@
 var util = require('../../common/util.js');
+import Toast from '../../dist/toast/index';
 Page({
   data: {
     active: 2,
@@ -7,26 +8,23 @@ Page({
   onChange(event) {
     util.navigate(event);
   },
-  preview(){
+  preview() {
     var file = util.getData(util.constant.FILE_KEY);
-    if(file){
+    if (file) {
       util.openFile(file);
     }
   },
-  save(){
+  save() {
+
     var file = util.getData(util.constant.FILE_KEY);
     if (file) {
-      util.saveFile(file);
-      wx.getSavedFileList({
-        success: function (res) {
-          console.log(res.fileList);
-          var files = res.fileList;
-          console.log(files[0]);
-          console.log(files[0].filePath);
-          util.openFile(files[0].filePath);
-        }
+      util.saveClip(file, function(res) {
+        Toast.clear();
       });
     }
+  },
+  manual() {
+    util.navTo("manual/index");
   },
   //分享功能
   onShareAppMessage: function(res) {

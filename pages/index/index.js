@@ -1,4 +1,5 @@
 import Page from '../../common/page';
+import Toast from '../../dist/toast/index';
 var util = require('../../common/util.js');
 Page({
   data: {
@@ -7,14 +8,9 @@ Page({
       middle: false
     }
   },
-  toggle(type) {
-    this.setData({
-      [`show.${type}`]: !this.data.show[type]
-    });
-  },
   uploadPhoto() { 
     var that = this;
-    util.upload(0,that);
+    util.upload(0, that, Toast);
   },
   onChange(event) {
     util.navigate(event);

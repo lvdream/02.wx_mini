@@ -9,6 +9,8 @@
     "van-switch": "../../dist/switch/index",
     "van-row": "../../dist/row/index",
     "van-col": "../../dist/col/index",
-    "van-popup": "../../dist/popup/index"
+    "van-popup": "../../dist/popup/index",
+    "van-tabbar": "../../dist/tabbar/index",
+    "van-tabbar-item": "../../dist/tabbar-item/index"
   }
 }

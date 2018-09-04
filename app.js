@@ -37,6 +37,7 @@ App({
     userInfo: null,
     SERVER_URL: "https://www.xbkb.xyz/orc",
     FILE_KEY:'file_key',
+    TEXT_KEY: 'text_key',
     MSG_UPLOAD_ERROR:'上传失败'
   }
 })

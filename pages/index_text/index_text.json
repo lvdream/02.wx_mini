@@ -6,6 +6,11 @@
     "van-tabbar-item": "../../dist/tabbar-item/index",
     "van-field": "../../dist/field/index",
     "van-button": "../../dist/button/index",
-    "van-cell-group": "../../dist/cell-group/index"
+    "van-cell-group": "../../dist/cell-group/index",
+    "van-tag": "../../dist/tag/index",
+    "van-notice-bar": "../../dist/notice-bar/index",
+    "van-toast": "../../dist/toast/index",
+    "van-row": "../../dist/row/index",
+    "van-col": "../../dist/col/index"
   }
 }

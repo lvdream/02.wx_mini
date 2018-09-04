@@ -8,7 +8,7 @@ function navigate(eventObj) {
   if (eventObj.detail == 0) {
     url = "/pages/index/index";
   } else if (eventObj.detail == 1) {
-    url = "/pages/out/index";
+    url = "/pages/index_text/index_text";
   } else {
     url = "/pages/result_excel/result";
   }
@@ -18,15 +18,15 @@ function navigate(eventObj) {
  * 定义文件的上传
  * @param fileType: 文件类型{0,excel;1,text;2,english}
  */
-function upload(fileType, that) {
+function upload(fileType, that, Toast) {
   wx.chooseImage({
     count: 1, // 默认9
     sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
     success: function(res) {
       var tempFilePaths = res.tempFilePaths;
-      that.toggle('middle');
-      uploadfiles(that, tempFilePaths, fileType,that);
+      Toast.loading({ mask: true, message: '正在解析...', duration:0 });
+      uploadfiles(Toast, tempFilePaths, fileType);
     }
   });
 };
@@ -37,56 +37,58 @@ function upload(fileType, that) {
  * @param fileType 上传类型,识别类型[文本,Excel]
  * @param that 页面对象
  */
-function uploadfiles(page, path, fileType,that) {
+function uploadfiles(Toast, path, fileType) {
   var url = constant.SERVER_URL + "/upload";
-      wx.uploadFile({
-      url: url,
-      filePath: path[0],
-      name: 'file',
-      header: {
-        "Content-Type": "multipart/form-data"
-      },
-      formData: {
-        //和服务器约定的token, 一般也可以放在header中
-        'session_token': wx.getStorageSync('session_token'),
-        'type': fileType
-      },
-      success: function(res) {
-        if (res.statusCode != 200) {
-          that.toggle('middle');
-          showMsg(constant.MSG_UPLOAD_ERROR);
-          return;
-        }
-        var data = res.data;
-        try {
-          var j = JSON.parse(data);
-          if (null != j.data.error_code) {
-            that.toggle('middle');
-            showMsg('文件解析失败,请重试!');
-          } else {
-            
-            saveData(constant.FILE_KEY, j.data.returnstr);
-            that.toggle('middle');
-            navTo("/pages/result_excel/result");
-          }
-        } catch (e) {
-          that.toggle('middle');
-          showMsg(constant.MSG_UPLOAD_ERROR);
-        }
-      },
-      fail: function(e) {
-        that.toggle('middle');
+  wx.uploadFile({
+    url: url,
+    filePath: path[0],
+    name: 'file',
+    header: {
+      "Content-Type": "multipart/form-data"
+    },
+    formData: {
+      //和服务器约定的token, 一般也可以放在header中
+      'session_token': wx.getStorageSync('session_token'),
+      'type': fileType
+    },
+    success: function(res) {
+      if (res.statusCode != 200) {
         showMsg(constant.MSG_UPLOAD_ERROR);
-      },
-      complete: function() {
-        that.toggle('middle');
+        return;
       }
-    })
+      var data = res.data;
+      try {
+        var j = JSON.parse(data);
+        if (null != j.data.error_code) {
+          showMsg('文件解析失败,请重试!', Toast);
+        } else {
+          Toast.clear();
+          if(fileType==0){
+            saveData(constant.FILE_KEY, j.data.returnstr);
+            navTo("/pages/result_excel/result");
+          }else{
+            saveData(constant.TEXT_KEY, j.data.returnstr);
+            navTo("/pages/result/result");
+          }
+          
+        }
+      } catch (e) {
+        showMsg(constant.MSG_UPLOAD_ERROR);
+      }
+    },
+    fail: function(e) {
+      showMsg(constant.MSG_UPLOAD_ERROR);
+    },
+    complete: function() {
+      Toast.clear();
+    }
+  })
 };
 /**
  * 显示提示框
  */
-function showMsg(content) {
+function showMsg(content, Toast) {
+  Toast.clear();
   wx.showModal({
     title: '提示',
     content: content,
@@ -128,7 +130,7 @@ function openFile(fileRemote) {
 function saveFile(fileRemote) {
   wx.downloadFile({
     url: constant.SERVER_URL + "/download?file=" + fileRemote,
-    success: function (res) {
+    success: function(res) {
       var filePath = res.tempFilePath
       wx.saveFile({
         tempFilePath: filePath,
@@ -151,12 +153,23 @@ function saveData(key, value) {
 function getData(key) {
   return wx.getStorageSync(key);
 }
+/**
+ * 保存信息到剪贴板
+ */
+function saveClip(value,ft) {
+  
+  wx.setClipboardData({
+    data: constant.SERVER_URL + "/download?file=" + value,
+    success: ft
+  })
+}
 module.exports = {
   navigate: navigate,
+  navTo: navTo,
   upload: upload,
   constant: constant,
   getData: getData,
   saveData: saveData,
   openFile: openFile,
-  saveFile: saveFile
+  saveClip: saveClip
 };

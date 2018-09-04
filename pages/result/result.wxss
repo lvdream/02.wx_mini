@@ -42,3 +42,7 @@
   background-color: #fff;
   padding: 17px 15px;
 }
+.row {
+  height: 44px;
+  margin-bottom: 15px;
+}

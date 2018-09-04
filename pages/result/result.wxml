@@ -1,14 +1,6 @@
-<view class="container">
-  <view class="title">
-    <view class="title-text">小贝复制</view>
-  </view>
-  <view class="desc">发现图片里面的秘密</view>
-
-<demo-block title="发现图片里面的奥秘">
+<include src="../../common/common.wxml" />
 <van-cell-group>
   <van-field value="{{ ocrValue }}" border="{{ false }}" clearable
    rows="5" autosize type="textarea"
    />
 </van-cell-group>
-</demo-block>
-</view>

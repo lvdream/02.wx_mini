@@ -1,0 +1,7 @@
+<include src="../../../common/common.wxml" />
+<van-notice-bar text="如何使用剪贴板导出文件" />
+<van-steps steps="{{ steps }}" active="{{ active }}" custom-class="demo-margin-bottom" />
+<van-button custom-class="demo-margin-left" bind:click="nextStep">下一步</van-button>
+<view class="content">
+  <text>{{manual_text}}</text>
+</view>
