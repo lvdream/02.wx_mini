@@ -1,4 +1,5 @@
 import Page from '../../../common/page';
+var util = require('../../../common/util.js');
 Page({
   onChange(event) {
     util.navigate(event);
