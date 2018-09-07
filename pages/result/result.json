@@ -11,6 +11,7 @@
     "van-col": "../../dist/col/index",
     "van-popup": "../../dist/popup/index",
     "van-tabbar": "../../dist/tabbar/index",
-    "van-tabbar-item": "../../dist/tabbar-item/index"
+    "van-tabbar-item": "../../dist/tabbar-item/index",
+    "van-notice-bar": "../../dist/notice-bar/index"
   }
 }

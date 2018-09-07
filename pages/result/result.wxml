@@ -1,4 +1,7 @@
 <include src="../../common/common.wxml" />
+<view class="row">
+  <van-notice-bar scrollable="{{ false }}" text="{{ text }}" />
+</view>
 <van-cell-group>
   <van-field value="{{ ocrValue }}" border="{{ false }}" clearable
    rows="5" autosize type="textarea"

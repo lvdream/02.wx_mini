@@ -25,7 +25,11 @@ function upload(fileType, that, Toast) {
     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
     success: function(res) {
       var tempFilePaths = res.tempFilePaths;
-      Toast.loading({ mask: true, message: '正在解析...', duration:0 });
+      Toast.loading({
+        mask: true,
+        message: '正在解析...',
+        duration: 0
+      });
       uploadfiles(Toast, tempFilePaths, fileType);
     }
   });
@@ -63,14 +67,14 @@ function uploadfiles(Toast, path, fileType) {
           showMsg('文件解析失败,请重试!', Toast);
         } else {
           Toast.clear();
-          if(fileType==0){
+          if (fileType == 0) {
             saveData(constant.FILE_KEY, j.data.returnstr);
             navTo("/pages/result_excel/result");
-          }else{
+          } else {
             saveData(constant.TEXT_KEY, j.data.returnstr);
             navTo("/pages/result/result");
           }
-          
+
         }
       } catch (e) {
         showMsg(constant.MSG_UPLOAD_ERROR);
@@ -110,15 +114,23 @@ function navTo(url) {
 /**
  * 下载远程文件并且打开
  */
-function openFile(fileRemote) {
-  wx.downloadFile({
+function openFile(fileRemote, Toast) {
+  Toast.loading({
+    mask: true,
+    message: '正在准备预览文件...',
+    duration: 0
+  });
+  const downloadTask = wx.downloadFile({
     url: constant.SERVER_URL + "/download?file=" + fileRemote,
     success: function(res) {
       var filePath = res.tempFilePath
       wx.openDocument({
         filePath: filePath,
         success: function(res) {
-          console.log('打开文档成功')
+          Toast.clear();
+        },
+        complete: function(res) {
+          console.log(1);
         }
       })
     }
@@ -156,10 +168,9 @@ function getData(key) {
 /**
  * 保存信息到剪贴板
  */
-function saveClip(value,ft) {
-  
+function saveClip(value, ft) {
   wx.setClipboardData({
-    data: constant.SERVER_URL + "/download?file=" + value,
+    data: value,
     success: ft
   })
 }

@@ -1,6 +1,8 @@
 import Page from '../../../common/page';
 Page({
-
+  onChange(event) {
+    util.navigate(event);
+  },
   /**
    * 页面的初始数据
    */

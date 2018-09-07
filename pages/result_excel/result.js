@@ -2,7 +2,7 @@ var util = require('../../common/util.js');
 import Toast from '../../dist/toast/index';
 Page({
   data: {
-    active: 2,
+    active: 0,
     text: '文件解析完成,请点击以下按钮或者右上角分享....'
   },
   onChange(event) {
@@ -11,14 +11,13 @@ Page({
   preview() {
     var file = util.getData(util.constant.FILE_KEY);
     if (file) {
-      util.openFile(file);
+      util.openFile(file, Toast);
     }
   },
   save() {
-
     var file = util.getData(util.constant.FILE_KEY);
     if (file) {
-      util.saveClip(file, function(res) {
+      util.saveClip(util.constant.SERVER_URL + "/download?file=" + file, function(res) {
         Toast.clear();
       });
     }
@@ -43,17 +42,11 @@ Page({
 
     //分享类型中右上角的分享
     else {
-
       return {
         title: '小贝复制--分享给您的Excel',
         path: '/pages/index/index',
-        success: function(res) {
-
-
-        }
+        success: function(res) {}
       }
-
-
     }
   }
 });

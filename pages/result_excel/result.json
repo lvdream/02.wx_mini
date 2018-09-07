@@ -4,6 +4,7 @@
     "van-notice-bar": "../../dist/notice-bar/index",
     "van-button": "../../dist/button/index",
     "van-tabbar": "../../dist/tabbar/index",
-    "van-tabbar-item": "../../dist/tabbar-item/index"
+    "van-tabbar-item": "../../dist/tabbar-item/index",
+    "van-toast": "../../dist/toast/index"
   }
 }
