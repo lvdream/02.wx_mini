@@ -8,8 +8,7 @@
   user-select: none;
 }
 
-.logo,
-.title-text {
+.logo, .title-text {
   display: inline-block;
   vertical-align: middle;
 }
@@ -19,11 +18,6 @@
   margin-left: 15px;
   font-weight: 400;
   font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
-}
-
-.logo {
-  width: 36px;
-  height: 36px;
 }
 
 .desc {
@@ -42,17 +36,20 @@
   background-color: #fff;
   padding: 17px 15px;
 }
+
 .center {
   width: 60%;
   padding: 20px;
   text-align: center;
   box-sizing: border-box;
 }
+
 .content {
   padding: 20px;
   font-size: 16px;
-}.dark,
-.light {
+}
+
+.dark, .light {
   color: #fff;
   font-size: 13px;
   line-height: 30px;
@@ -60,4 +57,10 @@
   margin-bottom: 10px;
   margin-right: 10px;
   background-clip: content-box;
+}
+
+.button {
+  width: 90%;
+  justify-content:center;
+  align-items: center;
 }

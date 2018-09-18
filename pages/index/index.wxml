@@ -3,17 +3,10 @@
   <view class="row">
     <van-notice-bar text="识别带有表格内容的图片,支持手机拍摄的图片或者截屏图片" />
   </view>
-  <van-field value="{{ sms }}" center clearable label="待识别的图片" placeholder="图片" use-button-slot border="{{ false }}">
-    <van-button slot="button" size="small" type="primary" custom-class="button" bindtap='uploadPhoto'>点击选择</van-button>
-  </van-field>
 </van-cell-group>
-
 <van-row>
-  <text>示例</text>
-  <van-col span="8" custom-class="dark">
-    <image src="/dist/11.jpg" mode="aspectFill">
-    </image>
+  <van-col span="12" center>
+    <van-button custom-class="button" bindtap='uploadPhoto'>拍照解析</van-button>
   </van-col>
-  
+  <van-col span="12"> <van-button custom-class="button" type='primary' bindtap='uploadPhoto'>相册图片解析</van-button></van-col>
 </van-row>
-
