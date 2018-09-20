@@ -1,17 +1,12 @@
 <include src="../../common/common.wxml" />
-<van-cell-group>
+
 <view class="row">
-    <van-notice-bar text="识别普通图片,支持手机拍摄的图片或者截屏图片" />
+  <van-notice-bar text="识别普通图片,支持手机拍摄的图片或者截屏图片" />
+</view>
+<view class='center-view'>
+  <image mode='aspectFit' src="https://www.xbkb.xyz/mp_text.png" />
+</view>
+<view class='center-view'>
+  <van-button custom-class="button" bindtap='uploadCamera'>拍照解析</van-button>
+  <van-button custom-class="button" type='primary' bindtap='uploadPhoto'>相册图片解析</van-button>
   </view>
-    <van-field
-      value="{{ sms }}"
-      center
-      clearable
-      label="选择图片"
-      placeholder="图片"
-      use-button-slot
-      border="{{ false }}"
-    >
-      <van-button slot="button" size="small" type="primary" custom-class="button" bindtap='uploadPhoto'>点击选择</van-button>
-    </van-field>
-  </van-cell-group>

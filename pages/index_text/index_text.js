@@ -7,7 +7,11 @@ Page({
   },
   uploadPhoto() {
     var that = this;
-    util.upload(1, that, Toast);
+    util.upload(1, that, Toast, ['album']);
+  },
+  uploadCamera() {
+    var that = this;
+    util.upload(1, that, Toast, ['camera']);
   },
   onChange(event) {
     util.navigate(event);

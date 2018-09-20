@@ -7,3 +7,6 @@
    rows="5" autosize type="textarea"
    />
 </van-cell-group>
+<view class='center-view'>
+  <van-button custom-class="button" size="large" bindtap='uploadPhoto'>自动翻译</van-button>
+  </view>

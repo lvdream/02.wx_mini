@@ -18,11 +18,11 @@ function navigate(eventObj) {
  * 定义文件的上传
  * @param fileType: 文件类型{0,excel;1,text;2,english}
  */
-function upload(fileType, that, Toast) {
+function upload(fileType, that, Toast, device) {
   wx.chooseImage({
     count: 1, // 默认9
     sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+    sourceType: device, // 可以指定来源是相册还是相机，默认二者都有
     success: function(res) {
       var tempFilePaths = res.tempFilePaths;
       Toast.loading({

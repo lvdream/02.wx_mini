@@ -8,9 +8,13 @@ Page({
       middle: false
     }
   },
-  uploadPhoto() { 
+  uploadPhoto() {
     var that = this;
-    util.upload(0, that, Toast);
+    util.upload(0, that, Toast, ['album']);
+  },
+  uploadCamera() {
+    var that = this;
+    util.upload(0, that, Toast, ['camera']);
   },
   onChange(event) {
     util.navigate(event);

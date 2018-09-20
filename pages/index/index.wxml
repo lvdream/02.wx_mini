@@ -4,9 +4,10 @@
     <van-notice-bar text="识别带有表格内容的图片,支持手机拍摄的图片或者截屏图片" />
   </view>
 </van-cell-group>
-<van-row>
-  <van-col span="12" center>
-    <van-button custom-class="button" bindtap='uploadPhoto'>拍照解析</van-button>
-  </van-col>
-  <van-col span="12"> <van-button custom-class="button" type='primary' bindtap='uploadPhoto'>相册图片解析</van-button></van-col>
-</van-row>
+<view class='center-view'>
+   <image mode='aspectFit' src="https://www.xbkb.xyz/index_description.png" />
+</view>
+<view class='center-view'>
+ <van-button custom-class="button" bindtap='uploadCamera'>拍照解析</van-button>
+ <van-button custom-class="button" type='primary' bindtap='uploadPhoto'>相册图片解析</van-button>
+</view>

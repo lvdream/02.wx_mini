@@ -4,9 +4,9 @@
 </van-tabbar>
 <view class="container">
   <view class="title">
-  <image class="logo" src="https://www.xbkb.xyz/orc/s_logo.png" />
+  <image class="logo" src="https://www.xbkb.xyz/s_logo.png" />
     <view class="title-text">小贝复制</view>
   </view>
   <view class="desc">识别图片里的 [表格/文字]</view>
 </view>
-<van-toast id="van-toast" />
+<van-toast id="van-toast" /> 
