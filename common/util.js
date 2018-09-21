@@ -174,6 +174,34 @@ function saveClip(value, ft) {
     success: ft
   })
 }
+/**
+ * 文本翻译
+ * 
+ */
+function textTranslate(qStr, Toast,that) {
+  Toast.loading({
+    mask: true,
+    message: '正在认真的翻译...',
+    duration: 0
+  });
+  wx.request({
+    url: constant.SERVER_URL + '/textTranslate',
+    data: {
+      qStr: qStr
+    },
+    method: 'POST',
+    header: {
+      'content-type': 'application/x-www-form-urlencoded' // 默认值
+    },
+    success: function(res) {
+      Toast.clear();
+      that.setData({
+        textValue: res.data.data
+      });
+      
+    }
+  })
+}
 module.exports = {
   navigate: navigate,
   navTo: navTo,
@@ -182,5 +210,6 @@ module.exports = {
   getData: getData,
   saveData: saveData,
   openFile: openFile,
-  saveClip: saveClip
+  saveClip: saveClip,
+  textTranslate: textTranslate
 };
